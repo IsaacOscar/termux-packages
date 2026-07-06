@@ -1,0 +1,26 @@
+--- a/src/window.c
++++ b/src/window.c
+@@ -123,6 +123,12 @@ t3_window_t *t3_win_new(t3_window_t *parent, int height, int width, int y, int x
+   t3_window_t *retval;
+   int i;
+
++  if (height < 0) {
++       height = 0;
++  }
++  if (width < 0) {
++       width = 0;
++  }
+   if ((retval = t3_win_new_unbacked(parent, height, width, y, x, depth)) == NULL) {
+     return NULL;
+   }
+@@ -163,10 +169,6 @@ t3_window_t *t3_win_new_unbacked(t3_window_t *parent, int height, int width, int
+                                  int depth) {
+   t3_window_t *retval;
+
+-  if (height <= 0 || width <= 0) {
+-    return NULL;
+-  }
+-
+   if ((retval = calloc(1, sizeof(t3_window_t))) == NULL) {
+     return NULL;
+   }
